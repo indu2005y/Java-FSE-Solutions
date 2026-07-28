@@ -1,0 +1,12 @@
+<h2>Course List</h2>
+
+<p *ngIf="isLoading">Loading courses...</p>
+
+<div *ngIf="!isLoading">
+
+  <app-course-card
+    *ngFor="let course of courses"
+    [course]="course">
+  </app-course-card>
+
+</div>
