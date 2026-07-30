@@ -1,0 +1,46 @@
+<div
+class="card"
+[ngClass]="cardClasses"
+>
+
+<h3>{{course.name}}</h3>
+
+<p>
+<strong>Course Code:</strong>
+{{course.code}}
+</p>
+
+<p>
+<strong>Credits:</strong>
+{{course.credits | creditLabel}}
+</p>
+
+
+<div [ngSwitch]="course.gradeStatus">
+
+<p *ngSwitchCase="'passed'">
+✅ Passed
+</p>
+
+<p *ngSwitchCase="'failed'">
+❌ Failed
+</p>
+
+<p *ngSwitchCase="'pending'">
+⏳ Pending
+</p>
+
+</div>
+
+
+<button (click)="toggleDetails()">
+Show Details
+</button>
+
+
+<button (click)="toggleEnrollment()">
+{{ enrolled ? 'Unenroll' : 'Enroll' }}
+</button>
+
+
+</div>
