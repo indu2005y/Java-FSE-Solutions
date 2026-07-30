@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { CourseService } from '../../services/course.service';
+
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -20,12 +22,14 @@ export class Home implements OnInit, OnDestroy {
 
   availableCourses = 0;
 
-  // [property] -> One-way binding (Component → DOM)
-  // [(ngModel)] -> Two-way binding (Component ↔ DOM)
+  constructor(private courseService: CourseService) {}
 
   ngOnInit(): void {
-    this.availableCourses = 12;
+
+    this.availableCourses = this.courseService.getCourses().length;
+
     console.log('HomeComponent initialised — courses loaded');
+
   }
 
   ngOnDestroy(): void {
@@ -35,4 +39,5 @@ export class Home implements OnInit, OnDestroy {
   onEnrollClick() {
     this.message = 'Enrollment opened!';
   }
+
 }
