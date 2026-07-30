@@ -1,46 +1,40 @@
 <div
-class="card"
-[ngClass]="cardClasses"
+  class="card"
+  [ngClass]="cardClasses"
+  [ngStyle]="{
+    'border-left':
+      course.gradeStatus === 'passed'
+        ? '6px solid green'
+        : course.gradeStatus === 'failed'
+        ? '6px solid red'
+        : '6px solid gray'
+  }"
 >
 
-<h3>{{course.name}}</h3>
+  <h3>{{ course.name }}</h3>
 
-<p>
-<strong>Course Code:</strong>
-{{course.code}}
-</p>
+  <p><strong>Course Code:</strong> {{ course.code }}</p>
 
-<p>
-<strong>Credits:</strong>
-{{course.credits | creditLabel}}
-</p>
+  <p><strong>Credits:</strong> {{ course.credits | creditLabel }}</p>
 
+  <div [ngSwitch]="course.gradeStatus">
 
-<div [ngSwitch]="course.gradeStatus">
+    <p *ngSwitchCase="'passed'" style="color: green;">
+      ✅ Passed
+    </p>
 
-<p *ngSwitchCase="'passed'">
-✅ Passed
-</p>
+    <p *ngSwitchCase="'failed'" style="color: red;">
+      ❌ Failed
+    </p>
 
-<p *ngSwitchCase="'failed'">
-❌ Failed
-</p>
+    <p *ngSwitchCase="'pending'" style="color: gray;">
+      ⏳ Pending
+    </p>
 
-<p *ngSwitchCase="'pending'">
-⏳ Pending
-</p>
+  </div>
 
-</div>
-
-
-<button (click)="toggleDetails()">
-Show Details
-</button>
-
-
-<button (click)="toggleEnrollment()">
-{{ enrolled ? 'Unenroll' : 'Enroll' }}
-</button>
-
+  <button (click)="toggleDetails()">
+    Show Details
+  </button>
 
 </div>
